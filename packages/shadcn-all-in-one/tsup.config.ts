@@ -76,8 +76,6 @@ export default defineConfig([
 
       // Category exports
       hooks: "src/hooks.ts",
-      contexts: "src/contexts.ts",
-      providers: "src/providers.ts",
       utils: "src/utils.ts",
     },
     outDir: "dist",
