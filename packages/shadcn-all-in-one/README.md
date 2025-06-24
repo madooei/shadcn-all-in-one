@@ -27,6 +27,77 @@ npm install @madooei/shadcn-all-in-one
 npm install react react-dom tailwindcss
 ```
 
+## Styling Requirements
+
+This package **requires Tailwind CSS** for styling. Components use Tailwind utility classes and will not display correctly without Tailwind CSS properly configured in your project.
+
+### CSS Import Options
+
+This package works with Tailwind CSS v4.
+
+```js
+// src/main.tsx
+import "./index.css"; // or your main CSS file where you import Tailwind CSS
+import "@madooei/shadcn-all-in-one/shadcn.css"; // add this after your main CSS file
+```
+
+Alternatively, you can import the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
+
+```css
+// src/index.css
+@import "tailwindcss";
+@import "@madooei/shadcn-all-in-one/shadcn.css";
+```
+
+### Tailwind Configuration
+
+Configure your `tailwind.config.js` to include the component library:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    // Add this line to scan the component library:
+    "./node_modules/@madooei/shadcn-all-in-one/dist/**/*.{js,cjs}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Then update your `index.css` (or your main CSS file) file to use this configuration:
+
+```css
+// src/index.css
+@import "tailwindcss";
+@import "@madooei/shadcn-all-in-one/shadcn.css";
+@config "../tailwind.config.js"; // path to your Tailwind config file
+```
+
+> [!TIP]
+> Make note of the semicolon at the end of the `@import` and `@config` lines. This is required for Tailwind CSS to process these statements correctly.
+
+## Migration from shadcn UI
+
+After you've completed the above setup, take the following steps to migrate from shadcn UI to `@madooei/shadcn-all-in-one`:
+
+- Update your imports from shadcn UI to `@madooei/shadcn-all-in-one`. For example, change all `"@/components/ui/button"` to `"@madooei/shadcn-all-in-one/button"`.
+- Update `"@/lib/utils"` to `"@madooei/shadcn-all-in-one/utils"` for utility functions.
+- Update `"@/hooks/use-mobile"` to `"@madooei/shadcn-all-in-one/hooks"` for mobile detection hooks.
+- Delete `@/components/ui` directory if it exists, as all components are now included in the package.
+- Delete `@/lib/utils` directory if it exists, as all utility functions are now included in the package.
+- Delete shadcn's `./components.json` configuration file if it exists, as this package does not require it.
+- Remove any `@radix-ui/*` dependencies from `package.json` as this package already includes all necessary Radix UI components.
+- Likewise, remove `class-variance-authority`, `clsx`, `tw-animate-css`, `tailwind-merge`, `vaul`, `react-resizable-panels`, `react-day-picker`, `embla-carousel-react`, and `input-otp`.
+- However, keep `cmdk`, `date-fns`, `lucid-react`, `react-hook-form`, `recharts`, and `sonner` as these are peer dependencies and are still required for some components. (Of course, you will need `react`, `react-dom`, and `tailwindcss` as well.)
+- If you are using `sonner`, you will need to pass the `theme` prop to it, as the original version has a dependency on `next-themes`. This package removes that dependency. See the [Sonner Toast Notifications](#updated-sonner-toast-notifications) section below for more details.
+- Remove `node_modules` and `package-lock.json` (or `yarn.lock`, `pnpm-lock.yaml`, etc.) to ensure a clean installation of dependencies.
+- Reinstall dependencies and run your application to ensure everything works correctly with the new package.
+
 ## Usage
 
 You can import components in multiple ways for optimal bundle optimization:
@@ -115,7 +186,9 @@ All standard shadcn UI components are available:
 
 ### Modified UI Components
 
-**sonner**: The original version has a dependency on `next-themes`. I removed this dependency and now when you use it, you must pass the `theme` prop to it.
+#### Updated Sonner Toast Notifications
+
+The original version has a dependency on `next-themes`. I removed this dependency and now when you use it, you must pass the `theme` prop to it.
 
 ```tsx
 import { Toaster } from "@madooei/shadcn-all-in-one/sonner";
@@ -192,57 +265,6 @@ import { TooltipButton } from "@madooei/shadcn-all-in-one/tooltip-button";
 ```tsx
 import { useMobile } from "@madooei/shadcn-all-in-one/hooks";
 import { cn } from "@madooei/shadcn-all-in-one/utils";
-```
-
-## Styling
-
-This package **requires Tailwind CSS** for styling. Components use Tailwind utility classes and will not display correctly without Tailwind CSS properly configured in your project.
-
-### CSS Import Options
-
-This package works with Tailwind CSS v4.
-
-```js
-// src/main.tsx
-import "./index.css"; // or your main CSS file where you import Tailwind CSS
-import "@madooei/shadcn-all-in-one/shadcn.css"; // add this after your main CSS file
-```
-
-Alternatively, you can import the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
-
-```css
-// src/index.css
-@import "tailwindcss";
-@import "@madooei/shadcn-all-in-one/shadcn.css";
-```
-
-### Tailwind Configuration
-
-Configure your `tailwind.config.js` to include the component library:
-
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    // Add this line to scan the component library:
-    "./node_modules/@madooei/shadcn-all-in-one/dist/**/*.{js,cjs}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
-
-Then update your `index.css` (or your main CSS file) file to use this configuration:
-
-```css
-// src/index.css
-@import "tailwindcss";
-@import "@madooei/shadcn-all-in-one/shadcn.css";
-@config "../tailwind.config.js"; // path to your Tailwind config file
 ```
 
 ## Cloning the Repository
