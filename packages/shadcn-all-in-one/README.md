@@ -113,6 +113,36 @@ All standard shadcn UI components are available:
 - **Data Display**: Alert, Avatar, Badge, Calendar, Carousel, Chart, Progress, Skeleton, Sonner, Table
 - **Feedback**: Progress, Skeleton, Sonner
 
+### Modified UI Components
+
+**sonner**: The original version has a dependency on `next-themes`. I removed this dependency and now when you use it, you must pass the `theme` prop to it. 
+
+```tsx
+import { Toaster } from "@madooei/shadcn-all-in-one/sonner";
+import { Button } from "@madooei/shadcn-all-in-one/button";
+import { toast } from "sonner";
+
+function App() {
+  const { theme } = useTheme(); // Use your preferred theme management solution
+
+  return (
+    <div>
+      <Button
+        variant="outline"
+        onClick={() => toast("Event has been created")}
+      >
+        Default
+      </Button>
+      <Toaster 
+        theme={theme} // Pass the theme prop
+        richColors 
+        position="bottom-right" 
+      />
+    </div>
+  );
+}
+```
+
 ### Additional Components
 
 #### Icons
