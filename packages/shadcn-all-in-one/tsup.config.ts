@@ -5,7 +5,7 @@ export default defineConfig([
   {
     entry: ["src/index.ts"],
     outDir: "dist",
-    format: ["esm", "cjs"],
+    format: ["esm"],
     sourcemap: true,
     clean: true,
     dts: true,
@@ -81,7 +81,7 @@ export default defineConfig([
       utils: "src/utils.ts",
     },
     outDir: "dist",
-    format: ["esm", "cjs"],
+    format: ["esm"],
     sourcemap: true,
     dts: true,
     splitting: false,
@@ -96,7 +96,7 @@ export default defineConfig([
   },
   // CSS files - copy them to dist
   {
-    entry: ["src/styles/globals-v3.css", "src/styles/globals-v4.css"],
+    entry: ["src/styles/shadcn.css"],
     outDir: "dist",
     esbuildOptions(options) {
       options.loader = { ".css": "file" };
