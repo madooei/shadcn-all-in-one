@@ -17,9 +17,9 @@ export function checkPeerDependencies(): void {
   }
 
   // Check React version (basic check)
-  if (React.version && React.version.split(".")[0] < "16") {
+  if (React.version && React.version.split(".")[0] < "19") {
     errorMessages.push(
-      `React version ${React.version} is too old. Requires React >=16.8.0`,
+      `React version ${React.version} is too old. Requires React >=19.0.0`,
     );
   }
 

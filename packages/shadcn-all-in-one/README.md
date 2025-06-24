@@ -97,8 +97,6 @@ Import related functionality by category:
 
 ```tsx
 import * as hooks from "@madooei/shadcn-all-in-one/hooks";
-import * as contexts from "@madooei/shadcn-all-in-one/contexts";
-import * as providers from "@madooei/shadcn-all-in-one/providers";
 import * as utils from "@madooei/shadcn-all-in-one/utils";
 ```
 
@@ -165,15 +163,7 @@ import { TooltipButton } from "@madooei/shadcn-all-in-one/tooltip-button";
 ### Hooks, Contexts, and Utilities
 
 ```tsx
-import {
-  useFormField,
-  useSidebar,
-  useTheme,
-} from "@madooei/shadcn-all-in-one/hooks";
-import {
-  SidebarProvider,
-  TooltipProvider,
-} from "@madooei/shadcn-all-in-one/providers";
+import { useMobile } from "@madooei/shadcn-all-in-one/hooks";
 import { cn } from "@madooei/shadcn-all-in-one/utils";
 ```
 
@@ -191,7 +181,7 @@ import "./index.css"; // or your main CSS file where you import Tailwind CSS
 import "@madooei/shadcn-all-in-one/shadcn.css"; // add this after your main CSS file
 ```
 
-Alternatively, you can use the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
+Alternatively, you can import the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
 
 ```css
 // src/index.css
