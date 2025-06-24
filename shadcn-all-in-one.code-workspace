@@ -7,9 +7,6 @@
       "path": "packages/shadcn-all-in-one"
     },
     {
-      "path": "examples/with-tailwind3"
-    },
-    {
       "path": "examples/with-tailwind4"
     }
   ],
