@@ -115,7 +115,7 @@ All standard shadcn UI components are available:
 
 ### Modified UI Components
 
-**sonner**: The original version has a dependency on `next-themes`. I removed this dependency and now when you use it, you must pass the `theme` prop to it. 
+**sonner**: The original version has a dependency on `next-themes`. I removed this dependency and now when you use it, you must pass the `theme` prop to it.
 
 ```tsx
 import { Toaster } from "@madooei/shadcn-all-in-one/sonner";
@@ -127,16 +127,13 @@ function App() {
 
   return (
     <div>
-      <Button
-        variant="outline"
-        onClick={() => toast("Event has been created")}
-      >
+      <Button variant="outline" onClick={() => toast("Event has been created")}>
         Default
       </Button>
-      <Toaster 
+      <Toaster
         theme={theme} // Pass the theme prop
-        richColors 
-        position="bottom-right" 
+        richColors
+        position="bottom-right"
       />
     </div>
   );
