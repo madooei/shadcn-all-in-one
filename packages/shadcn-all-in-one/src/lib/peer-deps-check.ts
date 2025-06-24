@@ -33,7 +33,9 @@ export function checkPeerDependencies(): void {
           ? `Missing dependencies: ${missingDeps.join(", ")}\n\n`
           : "") +
         `Please install the required dependencies:\n` +
-        `npm install react react-dom tailwindcss\n\n` +
+        `npm install react react-dom tailwindcss date-fns react-hook-form cmdk\n\n` +
+        `Optional dependencies (install if using related components):\n` +
+        `npm install lucide-react recharts @tanstack/react-table sonner\n\n` +
         `Also ensure Tailwind CSS is configured in your project for proper styling.`,
     );
     error.name = "PeerDependencyError";
