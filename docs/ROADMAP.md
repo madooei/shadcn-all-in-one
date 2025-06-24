@@ -87,7 +87,7 @@ The Shadcn All In One package provides a comprehensive React component library t
 
 **Build Configuration** (`tsup.config.ts`)
 
-- Dual ESM/CJS output with React JSX preservation
+- ESM output with React JSX preservation
 - Deep entry points for tree-shaking optimization
 - TypeScript declaration generation
 - Source map support for development
@@ -142,6 +142,7 @@ The Shadcn All In One package provides a comprehensive React component library t
    - Component prop validation
 
 5. **Advanced Styling**
+
    - Dynamic theme system beyond static Tailwind classes
    - CSS-in-JS integration options
    - Component variant system expansion
@@ -156,6 +157,7 @@ The Shadcn All In One package provides a comprehensive React component library t
 ### Low Priority
 
 7. **Advanced Features**
+
    - Headless component patterns
    - Advanced animation and transition support
    - Component performance monitoring

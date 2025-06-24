@@ -28,7 +28,7 @@ This document provides technical details for developers working on the Shadcn Al
 **Why tsup for shadcn UI components:**
 
 - Fast builds with esbuild under the hood
-- Dual format output (ESM + CJS) without complex configuration
+- ESM module output without complex configuration
 - React JSX preservation for optimal compatibility
 - Automatic declaration file generation
 - Built-in code splitting and tree-shaking
@@ -42,7 +42,7 @@ export default defineConfig([
   {
     entry: ["src/index.ts"],
     outDir: "dist",
-    format: ["esm", "cjs"],
+    format: ["esm"],
     sourcemap: true,
     clean: true,
     dts: true,
@@ -59,11 +59,11 @@ export default defineConfig([
       button: "src/components/ui/button.tsx",
       card: "src/components/ui/card.tsx",
       // ... all other shadcn UI components
-      
+
       // Additional Components
       icons: "src/components/icons.tsx",
       "tooltip-button": "src/components/tooltip-button.tsx",
-      
+
       // Category exports
       hooks: "src/hooks.ts",
       contexts: "src/contexts.ts",
@@ -71,7 +71,7 @@ export default defineConfig([
       utils: "src/utils.ts",
     },
     outDir: "dist",
-    format: ["esm", "cjs"],
+    format: ["esm"],
     sourcemap: true,
     dts: true,
     splitting: false,
@@ -83,10 +83,7 @@ export default defineConfig([
 
 ### Module Format Strategy
 
-**Dual ESM/CJS Support for React:**
-
 - Modern bundlers use ESM (`module` field)
-- Legacy tools use CJS (`main` field)
 - Deep entry points for optimal tree-shaking
 
 **package.json Configuration:**
@@ -101,32 +98,21 @@ export default defineConfig([
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
       }
     },
     "./button": {
       "import": {
         "types": "./dist/button.d.ts",
         "default": "./dist/button.js"
-      },
-      "require": {
-        "types": "./dist/button.d.cts",
-        "default": "./dist/button.cjs"
       }
     },
     "./icons": {
       "import": {
         "types": "./dist/icons.d.ts",
         "default": "./dist/icons.js"
-      },
-      "require": {
-        "types": "./dist/icons.d.cts",
-        "default": "./dist/icons.cjs"
       }
-    }
+    },
+    "./shadcn.css": "./dist/shadcn.css"
   }
 }
 ```
@@ -180,7 +166,6 @@ src/
 ├── hooks.ts                    # Category export for hooks
 ├── contexts.ts                 # Category export for contexts
 ├── providers.ts                # Category export for providers
-├── utils.ts                    # Category export for utilities
 ├── components/
 │   ├── ui/                     # All shadcn UI components
 │   │   ├── accordion.tsx
@@ -194,7 +179,9 @@ src/
 ├── contexts/                   # Individual context files
 ├── providers/                  # Individual provider files
 └── lib/
+    ├── peer-deps-check.ts      # Peer dependency validation
     └── utils.ts                # Utility functions
+
 ```
 
 ### Peer Dependencies Strategy
@@ -232,23 +219,29 @@ src/
 ### Core shadcn UI Components
 
 **Layout Components:**
+
 - Accordion, Aspect Ratio, Card, Collapsible, Separator, Sheet, Sidebar
 
 **Navigation Components:**
+
 - Breadcrumb, Command, Menubar, Navigation Menu, Pagination, Tabs
 
 **Form Components:**
+
 - Button, Checkbox, Form, Input, Input OTP, Label, Radio Group, Select, Slider, Switch, Textarea, Toggle, Toggle Group
 
 **Overlay Components:**
+
 - Alert Dialog, Dialog, Drawer, Dropdown Menu, Hover Card, Popover, Tooltip
 
 **Data Display Components:**
+
 - Alert, Avatar, Badge, Calendar, Carousel, Chart, Progress, Skeleton, Sonner, Table
 
 ### Additional Components
 
 **Icons Collection:**
+
 ```typescript
 // src/components/icons.tsx
 export const Icons = {
@@ -260,6 +253,7 @@ export const Icons = {
 ```
 
 **Enhanced Components:**
+
 ```typescript
 // src/components/tooltip-button.tsx
 export const TooltipButton = React.forwardRef<
@@ -387,7 +381,7 @@ Button.displayName = "Button";
 **Peer Dependency Validation:**
 
 ```typescript
-// src/utils/peer-deps-check.ts
+// src/lib/peer-deps-check.ts
 export const checkPeerDependencies = () => {
   if (typeof React === "undefined") {
     throw new Error(
@@ -411,10 +405,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
-        outline: "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        default:
+          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -496,11 +494,10 @@ src/
 │   ├── sidebar-provider.tsx
 │   └── tooltip-provider.tsx
 ├── lib/
+│   ├── peer-deps-check.ts      # Peer dependency validation
 │   └── utils.ts                # Utility functions
 ├── types/
-│   └── sidebar-types.ts        # Type definitions
-└── utils/
-    └── peer-deps-check.ts      # Peer dependency validation
+    └── sidebar-types.ts        # Type definitions
 ```
 
 ### Test Structure

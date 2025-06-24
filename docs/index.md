@@ -11,7 +11,7 @@ A comprehensive React component library that consolidates all [shadcn UI compone
 - **Tree-shaking Optimized**: Import only what you need for smaller bundles
 - **TypeScript First**: Full TypeScript support with comprehensive type definitions
 - **Multiple Import Methods**: Barrel exports and individual component imports
-- **Modern Build System**: ES modules and CommonJS support
+- **Modern Build System**: ES modules only support
 - **Tailwind CSS Integration**: Seamless integration with Tailwind CSS
 - **Additional Components**: Icons collection and enhanced components like TooltipButton
 
@@ -183,18 +183,20 @@ This package **requires Tailwind CSS** for styling. Components use Tailwind util
 
 ### CSS Import Options
 
-This package provides version-specific CSS files for different Tailwind CSS versions:
-
-#### Tailwind CSS v3
+This package works with Tailwind CSS v4.
 
 ```js
-import "@madooei/shadcn-all-in-one/globals-v3.css";
+// src/main.tsx
+import "./index.css"; // or your main CSS file where you import Tailwind CSS
+import "@madooei/shadcn-all-in-one/shadcn.css"; // add this after your main CSS file
 ```
 
-#### Tailwind CSS v4
+Alternatively, you can use the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
 
-```js
-import "@madooei/shadcn-all-in-one/globals-v4.css";
+```css
+// src/index.css
+@import "tailwindcss";
+@import "@madooei/shadcn-all-in-one/shadcn.css";
 ```
 
 ### Tailwind Configuration
@@ -217,40 +219,13 @@ export default {
 };
 ```
 
-### Version Compatibility
+Then update your `index.css` (or your main CSS file) file to use this configuration:
 
-- **Tailwind CSS v3**: Use `import "@madooei/shadcn-all-in-one/globals-v3.css"` - Uses HSL color values
-- **Tailwind CSS v4**: Use `import "@madooei/shadcn-all-in-one/globals-v4.css"` - Uses OKLCH color values and modern CSS features
-
-### Complete Setup Example
-
-Here's a complete example for Tailwind CSS v4:
-
-```js
-// tailwind.config.js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@madooei/shadcn-all-in-one/dist/**/*.{js,cjs}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
-
-```tsx
-// src/main.tsx
-import "./index.css";
-import "@madooei/shadcn-all-in-one/globals-v4.css";
-import { Button } from "@madooei/shadcn-all-in-one/button";
-
-function App() {
-  return <Button>Hello World</Button>;
-}
+```css
+// src/index.css
+@import "tailwindcss";
+@import "@madooei/shadcn-all-in-one/shadcn.css";
+@config "../tailwind.config.js"; // path to your Tailwind config file
 ```
 
 ## Cloning the Repository
@@ -265,7 +240,7 @@ cd shadcn-all-in-one-workspace
 
 ## Repository Structure
 
-- `packages` — Contains the primary package(s) for this repository (e.g., `react-example-package`). Each package is self-contained and can be copied out and used independently.
+- `packages` — Contains the primary package(s) for this repository (e.g., `shadcn-all-in-one`). Each package is self-contained and can be copied out and used independently.
 - `examples` — Contains examples of how to use the packages. Each example is a minimal, standalone project.
 - `playgrounds` — Contains demos of the dependencies of the primary package(s). Each playground is a minimal, standalone project.
 - `scripts` — Contains scripts for the project to help with development and publishing.
@@ -287,9 +262,9 @@ To set up a multi-root workspace:
 
 1. Open Visual Studio Code.
 2. Navigate to `File > Open Workspace from File...`.
-3. Select the `react-example-package.code-workspace` file located at the root of the repository. This action will open all specified folders in one workspace.
+3. Select the `shadcn-all-in-one.code-workspace` file located at the root of the repository. This action will open all specified folders in one workspace.
 
-The `react-example-package.code-workspace` file can be customized to include different folders or settings. Here's a typical configuration:
+The `shadcn-all-in-one.code-workspace` file can be customized to include different folders or settings. Here's a typical configuration:
 
 ```json
 {
@@ -298,7 +273,7 @@ The `react-example-package.code-workspace` file can be customized to include dif
       "path": "packages/shadcn-all-in-one"
     },
     {
-      "path": "examples/with-tailwind3"
+      "path": "examples/with-tailwind4"
     },
     {
       "path": "playgrounds/vite"
