@@ -1,24 +1,6 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig([
-  // Main bundle with all components
-  {
-    entry: ["src/index.ts"],
-    outDir: "dist",
-    format: ["esm"],
-    sourcemap: true,
-    clean: true,
-    dts: true,
-    splitting: true,
-    treeshake: true,
-    external: ["react", "react-dom"],
-    esbuildOptions(options) {
-      options.alias = {
-        "@": "./src",
-      };
-      options.jsx = "automatic";
-    },
-  },
   // Individual component entries for optimal tree-shaking
   {
     entry: {

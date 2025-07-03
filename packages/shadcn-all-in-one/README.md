@@ -8,9 +8,9 @@ A comprehensive React component library that consolidates all [shadcn UI compone
 **Features:**
 
 - **Complete shadcn UI Collection**: All shadcn UI components in one package
-- **Tree-shaking Optimized**: Import only what you need for smaller bundles
+- **Tree-shaking Optimized**: Import only what you need for optimal bundle sizes
 - **TypeScript First**: Full TypeScript support with comprehensive type definitions
-- **Multiple Import Methods**: Barrel exports and individual component imports
+- **Individual Component Imports**: Each component is a separate bundle for maximum efficiency
 - **Modern Build System**: ES modules only support
 - **Tailwind CSS Integration**: Seamless integration with Tailwind CSS
 - **Additional Components**: Icons collection and enhanced components like TooltipButton
@@ -44,7 +44,7 @@ import "@madooei/shadcn-all-in-one/shadcn.css"; // add this after your main CSS 
 Alternatively, you can import the `@madooei/shadcn-all-in-one/shadcn.css` file directly in your `index.css` file:
 
 ```css
-// src/index.css
+/* src/index.css */
 @import "tailwindcss";
 @import "@madooei/shadcn-all-in-one/shadcn.css";
 ```
@@ -72,7 +72,7 @@ export default {
 Then update your `index.css` (or your main CSS file) file to use this configuration:
 
 ```css
-// src/index.css
+/* src/index.css */
 @import "tailwindcss";
 @import "@madooei/shadcn-all-in-one/shadcn.css";
 @config "../tailwind.config.js"; // path to your Tailwind config file
@@ -85,7 +85,7 @@ Then update your `index.css` (or your main CSS file) file to use this configurat
 
 After you've completed the above setup, take the following steps to migrate from shadcn UI to `@madooei/shadcn-all-in-one`:
 
-- Update your imports from shadcn UI to `@madooei/shadcn-all-in-one`. For example, change all `"@/components/ui/button"` to `"@madooei/shadcn-all-in-one/button"`.
+- Update your imports from shadcn UI to individual component imports. For example, change all `"@/components/ui/button"` to `"@madooei/shadcn-all-in-one/button"`.
 - Update `"@/lib/utils"` to `"@madooei/shadcn-all-in-one/utils"` for utility functions.
 - Update `"@/hooks/use-mobile"` to `"@madooei/shadcn-all-in-one/hooks"` for mobile detection hooks.
 - Delete `@/components/ui` directory if it exists, as all components are now included in the package.
@@ -100,22 +100,20 @@ After you've completed the above setup, take the following steps to migrate from
 
 ## Usage
 
-You can import components in multiple ways for optimal bundle optimization:
+Import components individually for optimal bundle optimization and tree-shaking:
 
-### Named Imports (Barrel Export)
+### Individual Component Imports (Recommended)
 
-Import multiple components from the main package:
+Import each component individually for the smallest possible bundle size:
 
 ```tsx
 import React from "react";
-import {
-  Button,
-  Card,
-  Input,
-  Dialog,
-  Icons,
-  TooltipButton,
-} from "@madooei/shadcn-all-in-one";
+import { Button } from "@madooei/shadcn-all-in-one/button";
+import { Card } from "@madooei/shadcn-all-in-one/card";
+import { Input } from "@madooei/shadcn-all-in-one/input";
+import { Dialog } from "@madooei/shadcn-all-in-one/dialog";
+import { Icons } from "@madooei/shadcn-all-in-one/icons";
+import { TooltipButton } from "@madooei/shadcn-all-in-one/tooltip-button";
 
 function App() {
   return (
@@ -128,34 +126,6 @@ function App() {
           Hover me
         </TooltipButton>
         <Icons.react className="w-6 h-6" />
-      </Card>
-    </div>
-  );
-}
-```
-
-### Individual Imports (Optimal Tree-Shaking)
-
-For the smallest possible bundle size, import components individually:
-
-```tsx
-import React from "react";
-import { Button } from "@madooei/shadcn-all-in-one/button";
-import { Card } from "@madooei/shadcn-all-in-one/card";
-import { Input } from "@madooei/shadcn-all-in-one/input";
-import { Icons } from "@madooei/shadcn-all-in-one/icons";
-import { TooltipButton } from "@madooei/shadcn-all-in-one/tooltip-button";
-
-function App() {
-  return (
-    <div>
-      <Card>
-        <Input placeholder="Enter your name" />
-        <Button>Click me!</Button>
-        <TooltipButton tooltipContent="This is a tooltip button">
-          Hover me
-        </TooltipButton>
-        <Icons.gitHub className="w-6 h-6" />
       </Card>
     </div>
   );
