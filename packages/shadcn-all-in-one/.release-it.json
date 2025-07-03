@@ -14,11 +14,12 @@
     "releaseName": "v${version}",
     "autoGenerate": {
       "changelog": true
-    }
+    },
+    "releaseNotes": "./changelog.sh stdout"
   },
   "hooks": {
     "before:init": ["npm run validate"],
-    "after:bump": "npm run build"
+    "after:bump": "npm run build && ./changelog.sh"
   },
   "plugins": {
     "@release-it/keep-a-changelog": {
