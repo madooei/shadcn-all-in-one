@@ -19,5 +19,10 @@
   "hooks": {
     "before:init": ["npm run validate"],
     "after:bump": "npm run build"
+  },
+  "plugins": {
+    "@release-it/keep-a-changelog": {
+      "filename": "CHANGELOG.md"
+    }
   }
 }
