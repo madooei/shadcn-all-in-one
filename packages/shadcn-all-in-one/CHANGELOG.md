@@ -2,17 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-
-
-* chore: update release script to use dotenv for environment variable management (75665cd)
-* chore: update devDependencies in package.json (8261f7c)
-* chore: update package.json to improve metadata and dependencies organization (d65279c)
-* chore: remove available examples and playgrounds sections from README files (fdbddf4)
-* refactor: simplify release configuration to use keep-a-changelog plugin (c86b45e)
-
-# Changelog
-
 ## [Unreleased]
+
+- chore: update release script to use dotenv for environment variable management (75665cd)
+- chore: update devDependencies in package.json (8261f7c)
+- chore: update package.json to improve metadata and dependencies organization (d65279c)
+- chore: remove available examples and playgrounds sections from README files (fdbddf4)
+- refactor: simplify release configuration to use keep-a-changelog plugin (c86b45e)
+
+## [0.2.2] - 2025-07-10
 
 ### ⚙️ Miscellaneous Tasks
 
