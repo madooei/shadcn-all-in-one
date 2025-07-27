@@ -2,11 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-
-
 ## [0.2.3](https://github.com/madooei/shadcn-all-in-one/compare/0.2.2...0.2.3) (2025-07-27)
-
-## [Unreleased]
 
 - chore: update release script to use dotenv for environment variable management (75665cd)
 - chore: update devDependencies in package.json (8261f7c)
